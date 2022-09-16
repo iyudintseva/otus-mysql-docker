@@ -23,12 +23,28 @@ CREATE TABLE WarehouseBin(
   CONSTRAINT fk_WarehouseBin_Warehouse FOREIGN KEY (WarehouseId) REFERENCES Warehouse (Id)
 );
 
+CREATE TABLE Category(
+  Id SMALLINT PRIMARY KEY AUTO_INCREMENT,
+  ParentCategoryId SMALLINT,
+  Name VARCHAR(50)   
+);
+
 CREATE TABLE Product (
   Id INT PRIMARY KEY AUTO_INCREMENT,
   Name VARCHAR(500) NOT NULL,
   Description VARCHAR(1000), 
- Age TINYINT,
- Size VARCHAR(8)
+  ProductType VARCHAR(20),
+  Season ENUM('На любой сезон','Зима','Демисезон','Весна','Лето','Осень'),
+  Size VARCHAR(8),
+  Specifications JSON 
+);
+
+CREATE TABLE ProcuctCategory(
+  CategoryId SMALLINT NOT NULL,
+  ProductId INT NOT NULL,
+  PRIMARY KEY (CategoryId, ProductId ),
+  CONSTRAINT fk_ProductCategory_Category FOREIGN KEY (CategoryId) REFERENCES Category (Id),
+  CONSTRAINT fk_ProductCategory_Product FOREIGN KEY (ProductId) REFERENCES Product (Id)
 );
 
 CREATE TABLE Vendor(
@@ -36,7 +52,7 @@ CREATE TABLE Vendor(
   Name VARCHAR(500) NOT NULL,
   Description VARCHAR(1000), 
   Address VARCHAR(1000) NOT NULL, 
-  EMail VARCHAR(500) NOT NULL, 
+  EMail VARCHAR(50) NOT NULL, 
   Phone VARCHAR(50) NOT NULL 
 );
 
@@ -66,7 +82,7 @@ CREATE TABLE Customer(
   FirstName VARCHAR(100) NOT NULL,
   LastName VARCHAR(400) NOT NULL,
   Address VARCHAR(1000),
-  EMail VARCHAR(500) NOT NULL,
+  EMail VARCHAR(50) NOT NULL,
   Phone VARCHAR(50) NOT NULL
 );
 
@@ -76,9 +92,10 @@ CREATE TABLE SalesOrder(
   CustomerId INT NOT NULL,
   NeedDelivery BOOLEAN,
   DeliveryDate DATE,  
-  DeliveryTimeInterval VARCHAR(100),
-  DeliveryCost NUMERIC(18,2),
-  Price NUMERIC(18,2),
+  DeliveryTimeInterval ENUM ('10:00-14:00','14:00-18:00','18:00-22:00'),
+  DeliveryCost NUMERIC(13,2),
+  Price NUMERIC(15,2),
+  Total NUMERIC(15,2),
   Promocode VARCHAR(8),
   CONSTRAINT fk_SalesOrder_Customer FOREIGN KEY (CustomerID) REFERENCES Customer (Id)
 );
@@ -88,9 +105,9 @@ CREATE TABLE OrderDtl(
   OrderLine INT NOT NULL,
   ProductId INT NOT NULL,
   VendorId  INT NOT NULL,
-  UnitCost  NUMERIC(18,2),
-  Discount  NUMERIC(5,2), 
-  Price     NUMERIC(18,2),
+  UnitCost  NUMERIC(13,2),
+  DiscountPercent FLOAT(4,2) UNSIGNED CHECK (Discount >= 0 AND Discount <= 100), 
+  Price NUMERIC(13,2),
   CONSTRAINT pk_OrderDtl PRIMARY KEY (SalesOrderId, OrderLine), 
   CONSTRAINT fk_OrderDtl_SalesOrder FOREIGN KEY (SalesOrderId) REFERENCES SalesOrder (Id) ON DELETE CASCADE,
   CONSTRAINT fk_OrderDtl_Product FOREIGN KEY (ProductId) REFERENCES Product (Id),
