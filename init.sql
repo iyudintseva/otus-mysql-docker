@@ -19,14 +19,14 @@ CREATE TABLE Warehouse(
 CREATE TABLE WarehouseBin(
   Id INT PRIMARY KEY AUTO_INCREMENT,
   WarehouseId INT NOT NULL,
-  BIN VARCHAR(16) NOT NULL,
+  Bin VARCHAR(16) NOT NULL,
   CONSTRAINT fk_WarehouseBin_Warehouse FOREIGN KEY (WarehouseId) REFERENCES Warehouse (Id)
 );
 
 CREATE TABLE Product (
- Id INT PRIMARY KEY AUTO_INCREMENT,
- Name VARCHAR(500) NOT NULL,
- Description VARCHAR(1000), 
+  Id INT PRIMARY KEY AUTO_INCREMENT,
+  Name VARCHAR(500) NOT NULL,
+  Description VARCHAR(1000), 
  Age TINYINT,
  Size VARCHAR(8)
 );
@@ -44,9 +44,9 @@ CREATE TABLE ProductVendor(
   VendorId  INT NOT NULL,
   ProductId INT NOT NULL,
   UnitCost  NUMERIC(18,2),
-  PRIMARY KEY (VendorID, ProductID ),
-  CONSTRAINT fk_ProductVendor_Vendor FOREIGN KEY (VendorID) REFERENCES Vendor (Id),
-  CONSTRAINT fk_ProductVendor_Product FOREIGN KEY (ProductID) REFERENCES Product (Id)
+  PRIMARY KEY (VendorId, ProductId ),
+  CONSTRAINT fk_ProductVendor_Vendor FOREIGN KEY (VendorId) REFERENCES Vendor (Id),
+  CONSTRAINT fk_ProductVendor_Product FOREIGN KEY (ProductId) REFERENCES Product (Id)
 );
 
 CREATE TABLE ProductBin(
@@ -54,7 +54,7 @@ CREATE TABLE ProductBin(
   VendorId INT NOT NULL,
   BinId INT NOT NULL,
   Count INT,
-  PRIMARY KEY (ProductID, VendorID, BinID),
+  PRIMARY KEY (ProductId, VendorId, BinId),
   CONSTRAINT fk_ProductBin_WarehouseBin FOREIGN KEY (BinId) REFERENCES WarehouseBin (Id),
   CONSTRAINT fk_ProductBin_Vendor FOREIGN KEY (VendorId) REFERENCES Vendor (Id),
   CONSTRAINT fk_ProductBin_Product FOREIGN KEY (ProductId) REFERENCES Product (Id)
@@ -70,7 +70,7 @@ CREATE TABLE Customer(
   Phone VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE CustomerOrder(
+CREATE TABLE SalesOrder(
   Id INT PRIMARY KEY AUTO_INCREMENT,
   OrderNumber VARCHAR(16) NOT NULL,
   CustomerId INT NOT NULL,
@@ -80,19 +80,19 @@ CREATE TABLE CustomerOrder(
   DeliveryCost NUMERIC(18,2),
   Price NUMERIC(18,2),
   Promocode VARCHAR(8),
-  CONSTRAINT fk_CustomerOrder_Customer FOREIGN KEY (CustomerID) REFERENCES Customer (Id)
+  CONSTRAINT fk_SalesOrder_Customer FOREIGN KEY (CustomerID) REFERENCES Customer (Id)
 );
 
 CREATE TABLE OrderDtl(
-  CustomerOrderId   INT NOT NULL,
+  SalesOrderId   INT NOT NULL,
   OrderLine INT NOT NULL,
   ProductId INT NOT NULL,
   VendorId  INT NOT NULL,
   UnitCost  NUMERIC(18,2),
   Discount  NUMERIC(5,2), 
   Price     NUMERIC(18,2),
-  CONSTRAINT pk_OrderDtl PRIMARY KEY (CustomerOrderId, OrderLine), 
-  CONSTRAINT fk_OrderDtl_CustomerOrder FOREIGN KEY (CustomerOrderId) REFERENCES CustomerOrder (Id) ON DELETE CASCADE,
+  CONSTRAINT pk_OrderDtl PRIMARY KEY (SalesOrderId, OrderLine), 
+  CONSTRAINT fk_OrderDtl_SalesOrder FOREIGN KEY (SalesOrderId) REFERENCES SalesOrder (Id) ON DELETE CASCADE,
   CONSTRAINT fk_OrderDtl_Product FOREIGN KEY (ProductId) REFERENCES Product (Id),
   CONSTRAINT fk_OrderDtl_ProductVendor FOREIGN KEY (VendorId, ProductId) REFERENCES ProductVendor (VendorId, ProductId)
 );
