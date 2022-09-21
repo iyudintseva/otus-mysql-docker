@@ -31,6 +31,7 @@ CREATE TABLE Category(
 
 CREATE TABLE Product (
   Id INT PRIMARY KEY AUTO_INCREMENT,
+  ProductCode CHAR(9) UNIQUE NOT NULL,
   Name VARCHAR(500) NOT NULL,
   Description VARCHAR(1000), 
   ProductType VARCHAR(20),
@@ -49,7 +50,7 @@ CREATE TABLE ProcuctCategory(
 
 CREATE TABLE Vendor(
   Id INT PRIMARY KEY AUTO_INCREMENT,
-  Name VARCHAR(500) NOT NULL,
+  Name VARCHAR(500) UNIQUE NOT NULL,
   Description VARCHAR(1000), 
   Address VARCHAR(1000) NOT NULL, 
   EMail VARCHAR(50) NOT NULL, 
@@ -69,7 +70,7 @@ CREATE TABLE ProductBin(
   ProductId INT NOT NULL,
   VendorId INT NOT NULL,
   BinId INT NOT NULL,
-  Count INT,
+  ProductCount INT,
   PRIMARY KEY (ProductId, VendorId, BinId),
   CONSTRAINT fk_ProductBin_WarehouseBin FOREIGN KEY (BinId) REFERENCES WarehouseBin (Id),
   CONSTRAINT fk_ProductBin_Vendor FOREIGN KEY (VendorId) REFERENCES Vendor (Id),
@@ -82,13 +83,14 @@ CREATE TABLE Customer(
   FirstName VARCHAR(100) NOT NULL,
   LastName VARCHAR(400) NOT NULL,
   Address VARCHAR(1000),
-  EMail VARCHAR(50) NOT NULL,
+  EMail VARCHAR(50) UNIQUE NOT NULL,
   Phone VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE SalesOrder(
   Id INT PRIMARY KEY AUTO_INCREMENT,
-  OrderNumber VARCHAR(16) NOT NULL,
+  OrderNumber VARCHAR(16) UNIQUE NOT NULL,
+  OrderDate DATETIME,
   CustomerId INT NOT NULL,
   NeedDelivery BOOLEAN,
   DeliveryDate DATE,  
