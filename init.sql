@@ -91,6 +91,7 @@ CREATE TABLE SalesOrder(
   Id INT PRIMARY KEY AUTO_INCREMENT,
   OrderNumber VARCHAR(16) UNIQUE NOT NULL,
   OrderDate DATETIME,
+  OrderStatus ENUM('Новый','Подтвержден','Оплачен','Доставлен','Отменен') default 'Новый',
   CustomerId INT NOT NULL,
   NeedDelivery BOOLEAN,
   DeliveryDate DATE,  
