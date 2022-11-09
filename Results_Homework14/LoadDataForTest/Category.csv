@@ -1,0 +1,61 @@
+FullName,Id,ParentId,Name
+apparel & accessories,1,0,apparel & accessories
+apparel & accessories > clothing,2,1,clothing
+apparel & accessories > clothing > dresses,3,2,dresses
+apparel & accessories > clothing > dresses > little black dresses,4,3,little black dresses
+apparel & accessories > clothing > one-pieces,5,2,One-pieces
+apparel & accessories > clothing > one-pieces > jumpsuits & rompers,6,5,jumpsuits & rompers
+apparel & accessories > clothing > outerwear,7,2,outerwear
+apparel & accessories > clothing > outerwear > coats & jackets,8,7,coats & jackets
+apparel & accessories > clothing > outerwear > coats & jackets > blazers,9,8,blazers
+apparel & accessories > clothing > outerwear > coats & jackets > trench coats,10,8,trench coats
+apparel & accessories > clothing > outerwear > vests,11,7,vests
+apparel & accessories > clothing > pants,12,2,pants
+apparel & accessories > clothing > pants > jeans,13,12,jeans
+apparel & accessories > clothing > shirts & tops,14,2,shirts & tops
+apparel & accessories > clothing > shirts & tops > camisoles & tank tops,15,14,camisoles & tank tops
+apparel & accessories > clothing > shirts & tops > shirts & blouses,16,14,shirts & blouses
+apparel & accessories > clothing > shirts & tops > sweaters & cardigans,17,14,sweaters & cardigans
+apparel & accessories > clothing > shirts & tops > sweatshirts,18,14,sweatshirts
+apparel & accessories > clothing > shirts & tops > t-shirts,19,14,t-shirts
+apparel & accessories > clothing > shorts,20,2,shorts
+apparel & accessories > clothing > skirts,21,2,skirts
+apparel & accessories > clothing > suits,22,2,suits
+apparel & accessories > clothing > underwear & socks,23,2,underwear & socks
+apparel & accessories > clothing > underwear & socks > hosiery,24,23,hosiery
+apparel & accessories > clothing > underwear & socks > socks,25,23,socks
+apparel & accessories > clothing > underwear & socks > underwear,26,23,underwear
+apparel & accessories > clothing accessories,27,1,clothing accessories
+apparel & accessories > clothing accessories > cufflinks,28,27,cufflinks
+apparel & accessories > clothing accessories > gloves & mittens,29,27,gloves & mittens
+apparel & accessories > clothing accessories > gloves & mittens > gloves,30,29,gloves
+apparel & accessories > clothing accessories > gloves & mittens > mittens,31,29,mittens
+apparel & accessories > clothing accessories > hats,32,27,hats
+apparel & accessories > clothing accessories > hats > beanies,33,32,beanies
+apparel & accessories > clothing accessories > hats > caps,34,32,caps
+apparel & accessories > clothing accessories > neckties,35,27,neckties
+apparel & accessories > clothing accessories > scarves & shawls,36,27,scarves & shawls
+apparel & accessories > handbags & wallets & cases,37,1,handbags & wallets & cases
+apparel & accessories > handbags & wallets & cases > handbags,38,37,handbags
+apparel & accessories > handbags & wallets & cases > handbags > shoulder bags,39,38,shoulder bags
+apparel & accessories > jewelry,40,1,
+apparel & accessories > jewelry > bracelets,41,40,bracelets
+apparel & accessories > jewelry > earrings,42,40,earrings
+apparel & accessories > jewelry > necklaces,43,40,necklaces
+apparel & accessories > jewelry > rings,44,40,rings
+apparel & accessories > shoes,45,1,shoes
+apparel & accessories > shoes > dress shoes,46,45,dress shoes
+apparel & accessories > shoes > dress shoes > oxford shoes,47,46,oxford shoes
+apparel & accessories > shoes > flats,48,45,flats
+apparel & accessories > shoes > loafers & slip-ons,49,45,loafers & slip-ons
+apparel & accessories > shoes > sandals,50,45,sandals
+health & beauty,51,0,health & beauty
+health & beauty > personal care ,52,1,personal care
+health & beauty > personal care > cosmetics,53,52,cosmetics
+health & beauty > personal care > cosmetics > perfume & cologne,54,53,perfume & cologne
+home & garden,55,0,home & garden
+home & garden > decor,56,55,decor
+home & garden > decor > candles,57,56,candles
+luggage & bags ,58,0,luggage & bags
+luggage & bags > luggage accessories ,59,58,luggage accessories
+luggage & bags > luggage accessories > luggage tags,60,58,luggage tags

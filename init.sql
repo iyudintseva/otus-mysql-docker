@@ -26,7 +26,8 @@ CREATE TABLE WarehouseBin(
 CREATE TABLE Category(
   Id SMALLINT PRIMARY KEY AUTO_INCREMENT,
   ParentCategoryId SMALLINT,
-  Name VARCHAR(50)   
+  Name VARCHAR(50),
+  INDEX idx_Category_Name (Name)
 );
 
 CREATE TABLE Product (
@@ -37,7 +38,10 @@ CREATE TABLE Product (
   ProductType VARCHAR(20),
   Season ENUM('На любой сезон','Зима','Демисезон','Весна','Лето','Осень'),
   Size VARCHAR(8),
-  Specifications JSON 
+  Specifications JSON,
+  txtSpecifications VARCHAR(3000),
+  INDEX idx_Product_Name (Name),
+  FULLTEXT idx_Product_Description (Description, txtSpecifications)
 );
 
 CREATE TABLE ProcuctCategory(
@@ -84,7 +88,8 @@ CREATE TABLE Customer(
   LastName VARCHAR(400) NOT NULL,
   Address VARCHAR(1000),
   EMail VARCHAR(50) UNIQUE NOT NULL,
-  Phone VARCHAR(50) NOT NULL
+  Phone VARCHAR(50) NOT NULL,
+  INDEX idx_Customer_FullName (FullName)
 );
 
 CREATE TABLE SalesOrder(
@@ -100,7 +105,8 @@ CREATE TABLE SalesOrder(
   Price NUMERIC(15,2),
   Total NUMERIC(15,2),
   Promocode VARCHAR(8),
-  CONSTRAINT fk_SalesOrder_Customer FOREIGN KEY (CustomerID) REFERENCES Customer (Id)
+  CONSTRAINT fk_SalesOrder_Customer FOREIGN KEY (CustomerID) REFERENCES Customer (Id),
+  INDEX idx_SalesOrder_OrderDate (OrderDate)
 );
 
 CREATE TABLE OrderDtl(

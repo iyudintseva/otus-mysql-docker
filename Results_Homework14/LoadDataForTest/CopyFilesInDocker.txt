@@ -1,0 +1,4 @@
+docker cp ./Results_Homework14/LoadDataForTest/Fashion.csv otus-mysql-docker-otusdb-1:/var/lib/mysql/Fashion.csv
+docker cp ./Results_Homework14/LoadDataForTest/City.csv otus-mysql-docker-otusdb-1:/var/lib/mysql/City.csv
+docker cp ./Results_Homework14/LoadDataForTest/Category.csv otus-mysql-docker-otusdb-1:/var/lib/mysql/Category.csv
+docker cp ./Results_Homework14/LoadDataForTest/Names.csv otus-mysql-docker-otusdb-1:/var/lib/mysql/Names.csv
