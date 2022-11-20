@@ -1,4 +1,4 @@
-FullName,Id,ParentId,Name
+FullName,Id,ParentCategoryId,Name
 apparel & accessories,1,0,apparel & accessories
 apparel & accessories > clothing,2,1,clothing
 apparel & accessories > clothing > dresses,3,2,dresses

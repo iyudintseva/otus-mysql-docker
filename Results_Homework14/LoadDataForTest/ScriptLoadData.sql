@@ -62,7 +62,7 @@ CREATE PROCEDURE Insert_Product(first_id INT, OUT next_id INT)
 BEGIN
   DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN END;
   START TRANSACTION;
-	SET @handle = (SELECT Handle from ImportProductData WHERE Id = first_id limit 1);
+    SET @handle = (SELECT Handle from ImportProductData WHERE Id = first_id limit 1);
     -- SET @handle = 's14-onl-li-4184l-navy';
     DROP TEMPORARY TABLE IF EXISTS tempProd; 
     CREATE TEMPORARY TABLE tempProd 
@@ -176,7 +176,7 @@ LOAD DATA INFILE '/var/lib/mysql/Category.csv'
      ESCAPED BY '\\'
  	 LINES TERMINATED BY '\r\n'
      IGNORE 1 LINES
-	(FullName,Id,ParentId,Name);
+	(FullName,Id,ParentCategoryId,Name);
 
 # move imported data in real tables
 CALL From_ImportProdutData_To_Product();
@@ -219,7 +219,6 @@ BEGIN
   DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN END;
   START TRANSACTION;
   SET @p1 = 0;
-  -- for each city create 3 warehouses
   label1: LOOP
     SET @p1 = @p1 + 1;
     SET @customerName = (Select FullName FRom ImportCustomerNames where id = @p1 limit 1);
@@ -231,15 +230,9 @@ BEGIN
     SET @lastName = SUBSTR(@customerName, @ind+1);
     SET @email = concat(@firstName, '_', @lastName, '@mail.ru');
     SET @phone = SUBSTR(CONCAT("+74951234", @p1, 00), 1, 12);
-
-    INSERT INTO Customer (Id, FullName, FirstName, LastName, Phone, EMail)
+    
+    INSERT IGNORE INTO Customer (Id, FullName, FirstName, LastName, Phone, EMail)
        VALUES(@p1, @customerName,  @firstName, @lastName, @phone, @email); 
-
-    INSERT INTO Warehouse (CityId, Name, Address, Phone, IsStore)
-       VALUES(@p1, 'MyShop-2',  concat(@cityName, ", ул. Ленина, д.1"), "+79998887766", 1); 
-
-    INSERT INTO Warehouse (CityId, Name, Address, Phone, IsStore)
-       VALUES(@p1, 'MyShop-3',  concat(@cityName, ", ул. Пушкина, д.1"), "+79998887766", 0); 
 
     IF @p1 < 200 THEN
       ITERATE label1;
@@ -255,9 +248,7 @@ delimiter ;
 CALL Create_Customer();
 SELECT * FROM Customer;
 drop table if exists ImportCustomerNames;
-drop procedure if exists Create_Warehouse;
-
-
+drop procedure if exists Create_Customer;
 
 #---------------------------------------------------------------------
 DROP PROCEDURE IF EXISTS `debug_msg`;

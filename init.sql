@@ -27,6 +27,7 @@ CREATE TABLE Category(
   Id SMALLINT PRIMARY KEY AUTO_INCREMENT,
   ParentCategoryId SMALLINT,
   Name VARCHAR(50),
+  FullName VARCHAR(500),
   INDEX idx_Category_Name (Name)
 );
 
@@ -44,7 +45,7 @@ CREATE TABLE Product (
   FULLTEXT idx_Product_Description (Description, txtSpecifications)
 );
 
-CREATE TABLE ProcuctCategory(
+CREATE TABLE ProductCategory(
   CategoryId SMALLINT NOT NULL,
   ProductId INT NOT NULL,
   PRIMARY KEY (CategoryId, ProductId ),
@@ -60,6 +61,7 @@ CREATE TABLE Vendor(
   EMail VARCHAR(50) NOT NULL, 
   Phone VARCHAR(50) NOT NULL 
 );
+
 
 CREATE TABLE ProductVendor(
   VendorId  INT NOT NULL,
